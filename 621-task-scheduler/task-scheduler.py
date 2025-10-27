@@ -1,5 +1,7 @@
 class Solution:
     def leastInterval(self, tasks: List[str], n: int) -> int:
+        if n < 1:
+            return len(tasks)
         hsmap = Counter(tasks)
         
         maxHeap = [-v for v in hsmap.values()]
