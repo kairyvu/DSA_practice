@@ -2,10 +2,12 @@ class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> List[str]:
         wordDict = set(wordDict)
         n = len(s)
-
+        cache = {}
         def backtrack(i):
             if i == n:
                 return [""]
+            if i in cache:
+                return cache[i]
             res = []
             for j in range(i, n):
                 w = s[i:j+1]
@@ -19,5 +21,6 @@ class Solution:
                     if string:
                         sentence += " " + string
                     res.append(sentence)
+            cache[i] = res
             return res
-        return backtrack(0)    
+        return backtrack(0)
