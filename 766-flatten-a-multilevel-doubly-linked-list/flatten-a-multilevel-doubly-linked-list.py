@@ -31,6 +31,7 @@ class Solution:
                 nextNode.prev = node
             dfs(nextNode)
 
-        curr = head
-        dfs(curr)
+        if not head:
+            return head
+        dfs(head)
         return head
