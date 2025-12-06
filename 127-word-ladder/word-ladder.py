@@ -16,16 +16,16 @@ class Solution:
         res = 1
         
         while q:
+            res += 1
             for _ in range(len(q)):
                 currWord = q.popleft()
-                if currWord == endWord:
-                    return res
                 for i in range(len(currWord)):
                     pattern = currWord[:i] + "*" + currWord[i+1:]
                     for w in patternDict[pattern]:
                         if w in visited:
                             continue
+                        if w == endWord:
+                            return res
                         visited.add(w)
                         q.append(w)
-            res += 1
         return 0
