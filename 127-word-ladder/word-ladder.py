@@ -28,4 +28,5 @@ class Solution:
                             return res
                         visited.add(w)
                         q.append(w)
+                    patternDict[pattern].clear()
         return 0
