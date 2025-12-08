@@ -14,13 +14,12 @@ class Solution:
         currNode = dummyHead
 
         while head:
-            val, next = head.val, head.next
-            newNode = Node(val)
+            newNode = Node(head.val)
             currNode.next = newNode
             currNode = currNode.next
             hsmap[head] = newNode
             head = head.next
-            
+
         for node in hsmap:
             oldRandomNode = node.random
             if not oldRandomNode:
