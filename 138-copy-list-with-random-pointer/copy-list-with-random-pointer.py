@@ -23,10 +23,13 @@ class Solution:
             curr = copy.next
         
         dummyHead = Node(0)
-        dummyHead.next = head
-        curr = dummyHead
-
-        while curr and curr.next:
-            curr.next = curr.next.next
+        currCopy = dummyHead
+        curr = head
+        while curr:
+            copy = curr.next
+            curr.next = copy.next
+            currCopy.next = copy
+            currCopy = copy
             curr = curr.next
+        
         return dummyHead.next
