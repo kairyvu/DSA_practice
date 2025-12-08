@@ -7,7 +7,7 @@ class Solution:
 
         for r in range(len(nums)):
             total += nums[r]
-            while (r - l + 1) > res and nums[r] * (r - l + 1) - total > k:
+            while nums[r] * (r - l + 1) - total > k:
                 total -= nums[l]
                 l += 1
             res = max(res, r - l + 1)
