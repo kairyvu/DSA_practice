@@ -9,30 +9,14 @@ class Solution:
         head = ListNode()
         curr = head
 
-        while l1 and l2:
-            currSum = l1.val + l2.val + extra
+        while l1 or l2 or extra:
+            l1Val = l1.val if l1 else 0
+            l2Val = l2.val if l2 else 0
+            currSum = l1Val + l2Val + extra
             extra = 1 if currSum >= 10 else 0
             curr.next = ListNode(currSum % 10)
             curr = curr.next
-            l1 = l1.next
-            l2 = l2.next
-        
-        while l1:
-            currSum = l1.val + extra
-            extra = 1 if currSum >= 10 else 0
-            curr.next = ListNode(currSum % 10)
-            curr = curr.next
-            l1 = l1.next
-        
-        while l2:
-            currSum = l2.val + extra
-            extra = 1 if currSum >= 10 else 0
-            curr.next = ListNode(currSum % 10)
-            curr = curr.next
-            l2 = l2.next
-        
-        if extra:
-            curr.next = ListNode(extra)
-            extra = 0
+            l1 = l1.next if l1 else None
+            l2 = l2.next if l2 else None
         
         return head.next
