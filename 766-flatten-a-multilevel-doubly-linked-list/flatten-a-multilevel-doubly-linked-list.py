@@ -14,25 +14,26 @@ class Solution:
             return head
         
         def dfs(node):
-            curr = node
-            last = node
+            curr, prev = node, node
             while curr:
                 nextNode = curr.next
                 if curr.child:
-                    curr.next = curr.child
-                    childTail = dfs(curr.child)
-                    curr.child.prev = curr
+                    childHead = curr.child
+                    childTail = dfs(childHead)
                     curr.child = None
+                    curr.next = childHead
+                    childHead.prev = curr
 
                     if nextNode:
-                        childTail.next = nextNode
                         nextNode.prev = childTail
-                    last = childTail
+                        childTail.next = nextNode
+
+                    prev = childTail
                     curr = nextNode
                 else:
-                    last = curr
+                    prev = curr
                     curr = nextNode
-            return last
+            return prev
         
         dfs(head)
         return head
