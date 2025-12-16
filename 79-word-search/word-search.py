@@ -5,10 +5,10 @@ class Solution:
         visited = set()
         
         def dfs(r, c, i):
-            if i == n:
-                return True
             if not 0 <= r < rows or not 0 <= c < cols or board[r][c] != word[i] or (r, c) in visited:
                 return False
+            if i == n - 1:
+                return True
             
             visited.add((r, c))
             res = dfs(r + 1, c, i + 1) or dfs(r - 1, c, i + 1) or dfs(r, c + 1, i + 1) or dfs(r, c - 1, i + 1)
