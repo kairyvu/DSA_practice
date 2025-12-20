@@ -9,20 +9,17 @@ class Solution:
             if not (start in adj and target in adj):
                 return -1
             
-            q, visited = deque([(start, 1)]), set()
+            q, visited = deque([(start, 1)]), set([start])
             while q:
-                src, value = q.popleft()
-                if src == target:
+                node, value = q.popleft()
+                if node == target:
                     return value 
                 
-                visited.add(src)
-                for dst, val in adj[src]:
-                    if dst in visited:
+                for nei, w in adj[node]:
+                    if nei in visited:
                         continue
-                    q.append((dst, value * val))
+                    visited.add(nei)
+                    q.append((nei, value * w))
             return -1
         
-        res = []
-        for src, dst in queries:
-            res.append(bfs(src, dst))
-        return res
+        return [bfs(a, b) for a, b in queries]
