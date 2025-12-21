@@ -1,6 +1,6 @@
 class Solution:
     def uniquePathsWithObstacles(self, obstacleGrid: List[List[int]]) -> int:
-        if obstacleGrid[0][0] == 1 or obstacleGrid[0][0]:
+        if obstacleGrid[0][0] == 1 or obstacleGrid[-1][-1]:
             return 0
         m, n = len(obstacleGrid) - 1, len(obstacleGrid[0]) - 1
         memo = {}
