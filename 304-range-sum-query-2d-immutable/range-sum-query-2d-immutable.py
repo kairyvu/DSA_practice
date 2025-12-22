@@ -11,12 +11,12 @@ class NumMatrix:
                 self.sumMatrix[r][c] = prefix + above
                  
     def sumRegion(self, row1: int, col1: int, row2: int, col2: int) -> int:
-        bottomLeft = self.sumMatrix[row2 + 1][col2 + 1]
+        bottomRight = self.sumMatrix[row2 + 1][col2 + 1]
         topOuter = self.sumMatrix[row1][col2 + 1]
         leftOuter = self.sumMatrix[row2 + 1][col1]
         outerIntersect = self.sumMatrix[row1][col1]
 
-        return bottomLeft - topOuter - leftOuter + outerIntersect
+        return bottomRight - topOuter - leftOuter + outerIntersect
 
 
 
