@@ -1,0 +1,52 @@
+class TrieNode:
+    def __init__(self):
+        self.children = {}
+        self.top = []
+
+class AutocompleteSystem:
+
+    def __init__(self, sentences: List[str], times: List[int]):
+        self.root = TrieNode()
+        self.freq = defaultdict(int)
+        self.prefix = []
+        self.curr = self.root
+
+        for s, t in zip(sentences, times):
+            self.freq[s] += t
+            self.insert(s)
+    
+    def key(self, s):
+        return (-self.freq[s], s)
+    
+    def updateTop(self, node, sentence):
+        if sentence not in node.top:
+            node.top.append(sentence)
+        node.top.sort(key=self.key)
+        if len(node.top) > 3:
+            node.top.pop()
+    
+    def insert(self, sentence):
+        node = self.root
+        for c in sentence:
+            if c not in node.children:
+                node.children[c] = TrieNode()
+            node = node.children[c]
+            self.updateTop(node, sentence)
+
+    def input(self, c: str) -> List[str]:
+        if c == "#":
+            s = "".join(self.prefix)
+            self.freq[s] += 1
+            self.insert(s)
+            self.prefix = []
+            self.curr = self.root
+            return []
+
+        self.prefix.append(c)
+        if not self.curr:
+            return []
+        if c not in self.curr.children:
+            self.curr = None
+            return []
+        self.curr = self.curr.children[c]
+        return self.curr.top
