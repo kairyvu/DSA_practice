@@ -4,10 +4,11 @@ class Solution:
         res = 0
         for num in nums:
             if (num - 1) not in nums:
+                curr = num
                 currLength = 1
-                while (num + 1) in nums:
+                while (curr + 1) in nums:
                     currLength += 1
-                    num += 1
+                    curr += 1
                 res = max(res, currLength)
 
         return res
