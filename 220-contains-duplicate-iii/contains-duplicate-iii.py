@@ -11,9 +11,9 @@ class Solution:
             if bucket in buckets:
                 return True
 
-            if (bucket - 1) in buckets and num - buckets[bucket - 1] <= valueDiff:
+            if (bucket - 1) in buckets and abs(num - buckets[bucket - 1]) <= valueDiff:
                 return True
-            if (bucket + 1) in buckets and buckets[bucket + 1] - num <= valueDiff:
+            if (bucket + 1) in buckets and abs(num - buckets[bucket + 1]) <= valueDiff:
                 return True
             
             buckets[bucket] = num
