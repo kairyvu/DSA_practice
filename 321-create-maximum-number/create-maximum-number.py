@@ -13,14 +13,21 @@ class Solution:
                 stack.append(num)
             return stack[:k]
 
-        def merge(a, b):
-            res = []
-            while a or b:
-                if a > b:
-                    res.append(a.pop(0))
+        def merge(nums1, nums2):
+            p1, p2 = 0, 0
+            merged = []
+
+            while p1 < len(nums1) and p2 < len(nums2):
+                if nums1[p1:] <= nums2[p2:]:
+                    merged.append(nums2[p2])
+                    p2 += 1
                 else:
-                    res.append(b.pop(0))
-            return res
+                    merged.append(nums1[p1])
+                    p1 += 1
+            
+            merged.extend(nums1[p1:])
+            merged.extend(nums2[p2:])
+            return merged
             
 
         res = []
