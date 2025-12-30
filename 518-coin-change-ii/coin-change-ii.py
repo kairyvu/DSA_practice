@@ -1,16 +1,10 @@
 class Solution:
     def change(self, amount: int, coins: List[int]) -> int:
-        n = len(coins)
-        memo = {}
-        
-        def dfs(i, a):
-            if a == 0:
-                return 1    
-            if i == n or a < 0:
-                return 0
-            if (i, a) in memo:
-                return memo[(i, a)]
-            memo[(i, a)] = dfs(i, a - coins[i]) + dfs(i + 1, a)
-            return memo[(i, a)]
+        dp = [0] * (amount + 1)
+        dp[0] = 1
 
-        return dfs(0, amount)
+        for i in range(len(coins)):
+            for a in range(1, amount + 1):
+                if a - coins[i] >= 0:
+                    dp[a] += dp[a - coins[i]]
+        return dp[amount]
