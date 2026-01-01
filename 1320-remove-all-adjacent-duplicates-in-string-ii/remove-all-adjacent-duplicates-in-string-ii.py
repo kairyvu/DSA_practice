@@ -1,16 +1,15 @@
 class Solution:
     def removeDuplicates(self, s: str, k: int) -> str:
-        stack = []
-        for ch in s:
-            if stack and stack[-1][0] == ch:
-                char, time = stack.pop()
-                time += 1
-                if time < k:
-                    stack.append((char, time))
+        stack = [] # (char, num of repetition)
+        for c in s:
+            if stack and stack[-1][0] == c:
+                ch, rep = stack.pop()
+                if rep + 1 < k:
+                    stack.append((ch, rep + 1))
             else:
-                stack.append((ch, 1))
-
+                stack.append((c, 1))
+        
         res = []
-        for ch, time in stack:
-            res.append(ch * time)
+        for c, rep in stack:
+            res.append(c * rep)
         return "".join(res)
