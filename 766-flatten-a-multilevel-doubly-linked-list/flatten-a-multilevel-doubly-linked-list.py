@@ -14,7 +14,7 @@ class Solution:
             return head
         
         def dfs(node):
-            curr, prev = node, node
+            prev, curr = None, node
             while curr:
                 nextNode = curr.next
                 if curr.child:
@@ -23,11 +23,9 @@ class Solution:
                     curr.child = None
                     curr.next = childHead
                     childHead.prev = curr
-
                     if nextNode:
-                        nextNode.prev = childTail
                         childTail.next = nextNode
-
+                        nextNode.prev = childTail
                     prev = childTail
                     curr = nextNode
                 else:
