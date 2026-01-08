@@ -4,15 +4,11 @@ class Solution:
         resPath = []
 
         for p in pathArr:
-            if p == "..":
-                if not resPath:
-                    continue
-                resPath.pop()
-                resPath.pop()
-            elif not p or p == ".":
+            if p in ["", "."]:
                 continue
-            else:
-                resPath.append("/")
+            elif p != "..":
                 resPath.append(p)
+            elif resPath and p == "..":
+                resPath.pop()
         
-        return "/" if len(resPath) == 0 else "".join(resPath)
+        return "/" + "/".join(resPath)
