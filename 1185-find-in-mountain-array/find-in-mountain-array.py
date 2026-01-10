@@ -50,7 +50,7 @@ class Solution:
         leftCheck = getTargetLeft(topMountain)
         if leftCheck != -1:
             return leftCheck
-        rightCheck = getTargetRight(topMountain)
+        rightCheck = getTargetRight(topMountain + 1)
         if rightCheck != - 1:
             return rightCheck
         return -1
