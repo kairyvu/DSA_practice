@@ -20,37 +20,29 @@ class Solution:
                     r = mid
             return l
 
-        def getTargetLeft(topMountain):
-            l, r = 0, topMountain
+        def getTarget(l, r, increasing):
             while l <= r:
                 mid = (l + r) // 2
                 val = mountainArr.get(mid)
                 if val == target:
                     return mid
-                elif val < target:
-                    l = mid + 1
+                if increasing:
+                    if val < target:
+                        l = mid + 1
+                    else:
+                        r = mid - 1
                 else:
-                    r = mid - 1
-            return -1
-        
-        def getTargetRight(topMountain):
-            l, r = topMountain, length - 1
-            while l <= r:
-                mid = (l + r) // 2
-                val = mountainArr.get(mid)
-                if val == target:
-                    return mid
-                elif val < target:
-                    r = mid - 1
-                else:
-                    l = mid + 1
+                    if val < target:
+                        r = mid - 1
+                    else:
+                        l = mid + 1
             return -1
         
         topMountain = getTopMountain()
-        leftCheck = getTargetLeft(topMountain)
+        leftCheck = getTarget(0, topMountain, True)
         if leftCheck != -1:
             return leftCheck
-        rightCheck = getTargetRight(topMountain + 1)
+        rightCheck = getTarget(topMountain + 1, length - 1, False)
         if rightCheck != - 1:
             return rightCheck
         return -1
