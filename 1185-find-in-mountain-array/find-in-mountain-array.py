@@ -9,12 +9,19 @@
 class Solution:
     def findInMountainArray(self, target: int, mountainArr: 'MountainArray') -> int:
         length = mountainArr.length()
+        cache = {}
+        
+        def getVal(index):
+            if index in cache:
+                return cache[index]
+            cache[index] = mountainArr.get(index)
+            return cache[index]
 
         def getTopMountain():
             l, r = 0, length - 1
             while l < r:
                 mid = (l + r) // 2
-                if mountainArr.get(mid) < mountainArr.get(mid + 1):
+                if getVal(mid) < getVal(mid + 1):
                     l = mid + 1
                 else:
                     r = mid
@@ -23,7 +30,7 @@ class Solution:
         def getTarget(l, r, increasing):
             while l <= r:
                 mid = (l + r) // 2
-                val = mountainArr.get(mid)
+                val = getVal(mid)
                 if val == target:
                     return mid
                 if increasing:
