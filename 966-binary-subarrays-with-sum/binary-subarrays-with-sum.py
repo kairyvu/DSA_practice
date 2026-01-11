@@ -1,12 +1,18 @@
 class Solution:
     def numSubarraysWithSum(self, nums: List[int], goal: int) -> int:
-        count = defaultdict(int)
-        count[0] = 1
-        preSum = 0
-        res = 0
         
-        for num in nums:
-            preSum += num
-            res += count[preSum - goal]
-            count[preSum] += 1
-        return res
+        def countSubarrayToTarget(target):
+            if target < 0:
+                return 0
+            l = 0
+            currSum = 0
+            res = 0
+            for r in range(len(nums)):
+                currSum += nums[r]
+                while currSum > target:
+                    currSum -= nums[l]
+                    l += 1
+                res += (r - l + 1)
+            return res
+
+        return countSubarrayToTarget(goal) - countSubarrayToTarget(goal - 1) 
