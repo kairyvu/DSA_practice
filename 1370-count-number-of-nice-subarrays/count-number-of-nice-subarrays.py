@@ -9,9 +9,9 @@ class Solution:
             res = 0
 
             for r in range(len(nums)):
-                oddCount += (nums[r] % 2)
+                oddCount += (nums[r] & 1)
                 while oddCount > target:
-                    oddCount -= (nums[l] % 2)
+                    oddCount -= (nums[l] & 1)
                     l += 1
                 res += (r - l + 1)
             return res
